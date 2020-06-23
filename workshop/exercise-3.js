@@ -13,3 +13,17 @@ let mostPopularFood = [
   'parmesan chicken',
   'buffalo-flavored cauliflower',
 ];
+
+const fixList = (arr) => {
+  return arr.map((food, index) => food + ` (${index+1})`).sort();
+};
+
+const printList = (arr) => {
+  arr.forEach((food) => {
+    console.log(food);
+  });
+};
+
+printList(fixList(mostPopularFood));
+
+
