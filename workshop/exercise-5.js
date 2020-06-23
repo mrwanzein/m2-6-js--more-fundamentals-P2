@@ -8,8 +8,9 @@ const foodPairings = {
   strawberries: 'cream',
 };
 
-const getValue = () => {
-  // do something
+const getValue = (obj, str) => {
+  let pair = obj[str];
+  return pair !== undefined ? pair : 'not available';
 };
 
 expect(getValue(foodPairings, 'burgers'), 'beer');
