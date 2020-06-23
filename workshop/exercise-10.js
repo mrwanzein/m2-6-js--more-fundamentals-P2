@@ -15,17 +15,17 @@ let inputData = {
   motherAge: 35,
   motherStatus: 'worried',
   motherSuperpower1: null,
-  motherSuperpower1: null,
+  motherSuperpower2: null,
   bestFriendName: 'Mike Wheeler',
   bestFriendAge: 9,
   bestFriendStatus: 'frenetic',
   bestFriendSuperpower1: null,
-  bestFriendSuperpower1: null,
+  bestFriendSuperpower2: null,
   girlfriendName: 'Eleven',
   girlfriendAge: 9,
   girlfriendStatus: 'angry',
   girlfriendSuperpower1: 'telepathy',
-  girlfriendSuperpower1: 'multiverse portal sealing',
+  girlfriendSuperpower2: 'multiverse portal sealing',
 };
 
 // We want a function that can transform it from that shape to this shape:
@@ -80,7 +80,47 @@ let inputData = {
 // ⛔️ ['can-blink-lights', null]
 
 function transformData(data) {
-  // Your code here
+  let addressCompile = {
+    streetAddress: data.address1,
+    city: data.addressCity,
+    state: data.addressState,
+    country: data.addressCountry
+  };
+  
+
+  let relationshipCompile = [
+    {
+      type: 'mother',
+      name: data.motherName,
+      age: data.motherAge,
+      status: data.motherStatus,
+      superpowers: []
+    },
+    {
+      type: 'girlfriend',
+      name: data.girlfriendName,
+      age: data.girlfriendAge,
+      status: data.girlfriendStatus,
+      superpowers: [
+        data.girlfriendSuperpower1,
+        data.girlfriendSuperpower2
+      ]
+    }
+  ];
+
+
+  let transformed = {
+    name: data.name,
+    age: data.age,
+    status: data.status,
+    address: addressCompile,
+    superpowers: [
+      data.superpower1
+    ],
+    relationships: relationshipCompile
+  }
+
+  return transformed;
 }
 
 // `JSON.stringify` is used to "pretty-print" the output, so that it's easy
