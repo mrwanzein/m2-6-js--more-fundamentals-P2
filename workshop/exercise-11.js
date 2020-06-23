@@ -54,7 +54,22 @@ const favouriteDessertsGroupB = {
 // - Second, put them in order
 
 function sortDessertsByPopularity(dessertObject) {
-  // Write code
+  let trackingDessertOccurence = {};
+  let values = Object.values(dessertObject);
+  let finalArr = [];
+
+  values.forEach((dessert, index, arr) => {
+    trackingDessertOccurence[dessert] = 0;
+    arr.forEach(x => {
+      if(x === dessert) trackingDessertOccurence[dessert] += 1;
+    })
+  });
+
+  for (let dessert in trackingDessertOccurence){
+    finalArr.push([dessert, trackingDessertOccurence[dessert]])
+  }
+
+  return finalArr.sort((a, b) => b[1] - a[1]);
 }
 
 console.log(
@@ -94,7 +109,18 @@ console.log(
 // order, and that's 100% OK).
 
 function groupPeopleByDessert(dessertObject) {
-  // do something
+  let dessertObj = {};
+  let dessertNames = Object.values(dessertObject);
+
+  dessertNames.forEach(dessert => {
+    dessertObj[dessert] = [];
+    for(let name in dessertObject){
+      if(dessertObject[name] === dessert) dessertObj[dessert].push(name);
+    }
+  });
+
+  return dessertObj;
+
 }
 
 console.log(
