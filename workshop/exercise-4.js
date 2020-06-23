@@ -9,7 +9,8 @@ let foodPairings = {
 };
 
 const converter = (obj) => {
-  // do something
+  let arr = [[...Object.keys(obj)], [...Object.values(obj)]];
+  return arr;
 };
 
 console.log(converter(foodPairings));
