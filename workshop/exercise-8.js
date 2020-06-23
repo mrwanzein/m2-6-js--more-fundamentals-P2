@@ -48,3 +48,10 @@ const staffMembers = [
     },
   },
 ];
+
+const jsLevelEmployee = (dataSet, jsLevel) => {
+  let arr = dataSet.filter(x => x.skillLevels.javascript >= jsLevel);
+  return arr;
+}
+
+console.log(jsLevelEmployee(staffMembers, 6));
