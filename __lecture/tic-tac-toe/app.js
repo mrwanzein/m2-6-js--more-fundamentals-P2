@@ -14,28 +14,64 @@ const game = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 const PLAYER_1_ICON = 'X';
 const PLAYER_2_ICON = 'O';
 let COUNTER = 0; // track game progress
+let winner;
 
 // game starts with player 1
 let currentPlayer = '1';
 player1.classList.add('active');
 
 const handleRestart = () => {
-  // reload the page
-  // feels like cheating but it WILL reset the game
+  location.reload();
 };
 
 const toggleRestartBtn = () => {
-  // enable the restart btn
+  restartBtn.disabled = false;
 };
 
 const win = () => {
-  // stop board from being clickable
-  // print the winner to the screen
-  // activate the restart btn
+  board.removeEventListener('click', handleClick);
+  alert(`${winner} won!`);
+  toggleRestartBtn();
 };
 
 const verifyWin = () => {
-  // Use the game array to determine the winner.
+  //rows
+  if((game[0] === 'X' && game[1] === 'X' && game[2] === 'X') || (game[0] === 'O' && game[1] === 'O' && game[2] === 'O')){
+    winner = game[0];
+    win();
+  }
+  if((game[3] === 'X' && game[4] === 'X' && game[5] === 'X') || (game[3] === 'O' && game[4] === 'O' && game[5] === 'O')){
+    winner = game[3];
+    win();
+  }
+  if((game[6] === 'X' && game[7] === 'X' && game[8] === 'X') || (game[6] === 'O' && game[7] === 'O' && game[8] === 'O')){
+    winner = game[6];
+    win();
+  }
+
+  //columns
+  if((game[0] === 'X' && game[3] === 'X' && game[6] === 'X') || (game[0] === 'O' && game[3] === 'O' && game[6] === 'O')){
+    winner = game[0];
+    win();
+  }
+  if((game[1] === 'X' && game[4] === 'X' && game[7] === 'X') || (game[1] === 'O' && game[4] === 'O' && game[7] === 'O')){
+    winner = game[1];
+    win();
+  }
+  if((game[2] === 'X' && game[5] === 'X' && game[8] === 'X') || (game[2] === 'O' && game[5] === 'O' && game[8] === 'O')){
+    winner = game[2];
+    win();
+  }
+
+  //diagonals
+  if((game[0] === 'X' && game[4] === 'X' && game[8] === 'X') || (game[0] === 'O' && game[4] === 'O' && game[8] === 'O')){
+    winner = game[0];
+    win();
+  }
+  if((game[2] === 'X' && game[4] === 'X' && game[6] === 'X') || (game[2] === 'O' && game[4] === 'O' && game[6] === 'O')){
+    winner = game[2];
+    win();
+  }
 };
 
 const togglePlayer = () => {
@@ -48,11 +84,16 @@ const handleClick = (event) => {
   const cellId = cell.charAt(cell.length - 1);
   const icon = currentPlayer === '1' ? PLAYER_1_ICON : PLAYER_2_ICON;
 
+
   if (typeof game[cellId] === 'number') {
     currentCellDiv.innerText = icon;
 
-    // so much missing here...
+    currentPlayer === '1' ? currentPlayer = '2' : currentPlayer = '1';
+    game[cellId] = icon;
+    verifyWin();
+    console.log(game);
   }
 };
 
 board.addEventListener('click', handleClick);
+restartBtn.addEventListener('click', handleRestart);
